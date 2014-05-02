@@ -1,10 +1,10 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'rake/xcode/version'
+require 'rake/xcodebuild/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "rake-xcode"
+  spec.name          = "rake-xcodebuild"
   spec.version       = Rake::Xcode::VERSION
   spec.authors       = ["Adam Sharp"]
   spec.email         = ["adsharp@me.com"]

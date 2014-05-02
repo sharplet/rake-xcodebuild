@@ -1,5 +1,5 @@
 require 'bundler/gem_tasks'
-require 'rake/xcode'
+require 'rake/xcodebuild'
 require 'rake/testtask'
 
 Rake::TestTask.new do |t|
