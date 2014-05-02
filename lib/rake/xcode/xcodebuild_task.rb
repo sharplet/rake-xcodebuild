@@ -20,6 +20,7 @@ module Rake
 
     # The Xcode project file.
     attr_accessor :xcodeproj
+    alias_method :project=, :xcodeproj=
 
     # The Xcode workspace file.
     attr_accessor :workspace

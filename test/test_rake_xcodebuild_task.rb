@@ -53,4 +53,11 @@ class TestRakeXcodebuildTask < Rake::TestCase
     assert_equal expected, workspace_and_scheme.project_args
   end
 
+  def test_setting_project_attr_sets_xcodeproj
+    xct = Rake::XcodebuildTask.new do |t|
+      t.project = 'Project.xcodeproj'
+    end
+    assert_equal 'Project.xcodeproj', xct.xcodeproj
+  end
+
 end
