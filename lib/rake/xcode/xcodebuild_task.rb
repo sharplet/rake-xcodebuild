@@ -15,22 +15,41 @@ module Rake
     # no action is specified.)
     attr_accessor :name
     def name
-      @name ||= (action.to_sym if action) || :build
+      @name ||= action ? action.to_sym : :build
     end
+
+    # The Xcode project file.
+    attr_accessor :xcodeproj
+
+    # The Xcode workspace file.
+    attr_accessor :workspace
+
+    # The Xcode scheme.
+    attr_accessor :scheme
 
     def initialize
       yield self if block_given?
       define
     end
 
-    private
-
     def define
       task(name) do |t|
-        sh *['xcodebuild', action].compact
+        sh *['xcodebuild', action, *project_args].compact
       end
       self
     end
+
+    def project_args
+      args_for_attrs(:xcodeproj, :workspace, :scheme)
+    end
+
+    def args_for_attrs(*attrs)
+      attrs.reduce([]) do |args, key|
+        value = send(key)
+        value ? args.push("-#{key}", value) : args
+      end
+    end
+    private :args_for_attrs
 
   end
 

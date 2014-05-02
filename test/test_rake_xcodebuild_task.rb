@@ -27,4 +27,30 @@ class TestRakeXcodebuildTask < Rake::TestCase
     assert_equal :build_debug, custom_name.name
   end
 
+  def test_project_args_xcodeproj
+    project_only = Rake::XcodebuildTask.new do |t|
+      t.xcodeproj = 'Project.xcodeproj'
+    end
+    expected = ['-xcodeproj', 'Project.xcodeproj']
+    assert_equal expected, project_only.project_args
+  end
+
+  def test_project_args_xcodeproj_scheme
+    project_and_scheme = Rake::XcodebuildTask.new do |t|
+      t.xcodeproj = 'Project.xcodeproj'
+      t.scheme = 'Debug'
+    end
+    expected = ['-xcodeproj', 'Project.xcodeproj', '-scheme', 'Debug']
+    assert_equal expected, project_and_scheme.project_args
+  end
+
+  def test_project_args_workspace_scheme
+    workspace_and_scheme = Rake::XcodebuildTask.new do |t|
+      t.workspace = 'Project.xcworkspace'
+      t.scheme = 'Project'
+    end
+    expected = ['-workspace', 'Project.xcworkspace', '-scheme', 'Project']
+    assert_equal expected, workspace_and_scheme.project_args
+  end
+
 end
