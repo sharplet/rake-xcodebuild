@@ -28,6 +28,12 @@ module Rake
     # The Xcode scheme.
     attr_accessor :scheme
 
+    # Array of arbitrary xcodebuild options to pass through.
+    attr_accessor :xcodebuild_opts
+    def xcodebuild_opts
+      @xcodebuild_opts ||= []
+    end
+
     def initialize
       yield self if block_given?
       define
@@ -35,7 +41,7 @@ module Rake
 
     def define
       task(name) do |t|
-        sh *['xcodebuild', action, *project_args].compact
+        sh ['xcodebuild', action, *project_args, *xcodebuild_opts].join(" ")
       end
       self
     end

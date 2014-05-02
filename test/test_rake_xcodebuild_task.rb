@@ -60,4 +60,11 @@ class TestRakeXcodebuildTask < Rake::TestCase
     assert_equal 'Project.xcodeproj', xct.xcodeproj
   end
 
+  def test_xcodebuild_opts
+    xct = Rake::XcodebuildTask.new do |t|
+      t.xcodebuild_opts << '-sdk iphonesimulator'
+    end
+    assert_equal ['-sdk iphonesimulator'], xct.xcodebuild_opts
+  end
+
 end
