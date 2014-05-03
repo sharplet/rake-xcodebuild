@@ -67,4 +67,13 @@ class TestRakeXcodebuildTask < Rake::TestCase
     assert_equal ['-sdk iphonesimulator'], xct.xcodebuild_opts
   end
 
+  def test_implicit_file_extensions
+    xct = Rake::XcodebuildTask.new do |t|
+      t.xcodeproj = 'Project'
+      t.workspace = 'Project'
+    end
+    assert_equal 'Project.xcodeproj', xct.xcodeproj
+    assert_equal 'Project.xcworkspace', xct.workspace
+  end
+
 end

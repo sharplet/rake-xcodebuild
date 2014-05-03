@@ -20,10 +20,16 @@ module Rake
 
     # The Xcode project file.
     attr_accessor :xcodeproj
+    def xcodeproj=(xcodeproj)
+      @xcodeproj = xcodeproj.ext('.xcodeproj')
+    end
     alias_method :project=, :xcodeproj=
 
     # The Xcode workspace file.
     attr_accessor :workspace
+    def workspace=(workspace)
+      @workspace = workspace.ext('.xcworkspace')
+    end
 
     # The Xcode scheme.
     attr_accessor :scheme
