@@ -1,6 +1,22 @@
-# Rake::Xcode
+# Rake::Xcodebuild [![Build Status](https://travis-ci.org/sharplet/rake-xcodebuild.svg?branch=master)](https://travis-ci.org/sharplet/rake-xcodebuild)
 
-TODO: Write a gem description
+Automate tedious and repetitive configuration of `xcodebuild` command line options.
+
+Running your tests via `rake test` is as easy as putting this in your `Rakefile`:
+
+```ruby
+require 'rake/xcodebuild'
+
+task :default => [:test]
+
+Rake::XcodebuildTask.new do |t|
+  t.action = 'test'
+  t.workspace = 'MyProject' # => automatically looks for MyProject.xcworkspace
+  t.scheme = 'MyProject'
+  t.xcodebuild_opts << '-sdk iphonesimulator'
+end
+# => `xcodebuild test -workspace MyProject.xcworkspace -scheme MyProject -sdk iphonesimulator`
+```
 
 ## Installation
 
@@ -16,14 +32,6 @@ Or install it yourself as:
 
     $ gem install rake-xcodebuild
 
-## Usage
-
-TODO: Write usage instructions here
-
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/rake-xcodebuild/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+See the [Guidelines for Contributing](http://github.com/sharplet/rake-xcodebuild/blob/master/CONTRIBUTING.md).
