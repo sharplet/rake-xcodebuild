@@ -6,6 +6,7 @@ class TestRakeXcodebuildTask < Rake::TestCase
 
   def test_initialize
     xst = Rake::XCSchemeTask.new
+    assert_nil xst.name
     assert_equal ['build', 'test'], xst.actions
     assert Task.task_defined?(:build), "expected :build task to be defined"
     assert Task.task_defined?(:test), "expected :test task to be defined"
@@ -23,6 +24,10 @@ class TestRakeXcodebuildTask < Rake::TestCase
     assert_equal 'MyProject.xcworkspace', xst.tasks[:test].workspace
     assert_equal 'Demo', xst.tasks[:build].scheme
     assert_equal 'Demo', xst.tasks[:test].scheme
+
+    xst = Rake::XCSchemeTask.new('Scheme')
+    assert_equal 'Scheme', xst.tasks[:build].scheme
+    assert_equal 'Scheme', xst.tasks[:test].scheme
   end
 
 end
