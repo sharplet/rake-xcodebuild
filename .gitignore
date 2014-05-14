@@ -15,6 +15,5 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
-
-# OS X
 .DS_Store
+*.swp
