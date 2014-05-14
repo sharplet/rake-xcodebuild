@@ -76,10 +76,11 @@ class TestRakeXcodebuildTask < Rake::TestCase
     assert_equal 'Project.xcworkspace', xct.workspace
   end
 
-  def test_custom_task_name
-    xct = Rake::XcodebuildTask.new(:custom)
-    assert_equal :custom, xct.name
-    assert Task.task_defined?(:custom)
+  def test_initialize_action
+    xct = Rake::XcodebuildTask.new(:test)
+    assert_equal :test, xct.action
+    assert_equal :test, xct.name
+    assert Task.task_defined?(:test)
   end
 
 end

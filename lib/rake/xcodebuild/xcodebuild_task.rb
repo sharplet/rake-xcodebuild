@@ -40,8 +40,8 @@ module Rake
       @xcodebuild_opts ||= []
     end
 
-    def initialize(name = nil)
-      @name = name
+    def initialize(action = nil)
+      @action = action
       yield self if block_given?
       define
     end
