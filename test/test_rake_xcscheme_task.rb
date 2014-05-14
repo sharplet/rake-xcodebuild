@@ -17,8 +17,8 @@ class TestRakeXcodebuildTask < Rake::TestCase
       t.workspace = 'MyProject'
       t.scheme = 'Demo'
     end
-    assert_equal 'MyProject.xcodeproj', xst.tasks[:build].xcodeproj
-    assert_equal 'MyProject.xcodeproj', xst.tasks[:test].xcodeproj
+    assert_equal 'MyProject.xcodeproj', xst.tasks[:build].project
+    assert_equal 'MyProject.xcodeproj', xst.tasks[:test].project
     assert_equal 'MyProject.xcworkspace', xst.tasks[:build].workspace
     assert_equal 'MyProject.xcworkspace', xst.tasks[:test].workspace
     assert_equal 'Demo', xst.tasks[:build].scheme

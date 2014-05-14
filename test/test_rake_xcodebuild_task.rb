@@ -29,18 +29,18 @@ class TestRakeXcodebuildTask < Rake::TestCase
 
   def test_project_args_xcodeproj
     project_only = Rake::XcodebuildTask.new do |t|
-      t.xcodeproj = 'Project.xcodeproj'
+      t.project = 'Project.xcodeproj'
     end
-    expected = ['-xcodeproj', 'Project.xcodeproj']
+    expected = ['-project', 'Project.xcodeproj']
     assert_equal expected, project_only.project_args
   end
 
   def test_project_args_xcodeproj_scheme
     project_and_scheme = Rake::XcodebuildTask.new do |t|
-      t.xcodeproj = 'Project.xcodeproj'
+      t.project = 'Project.xcodeproj'
       t.scheme = 'Debug'
     end
-    expected = ['-xcodeproj', 'Project.xcodeproj', '-scheme', 'Debug']
+    expected = ['-project', 'Project.xcodeproj', '-scheme', 'Debug']
     assert_equal expected, project_and_scheme.project_args
   end
 
@@ -53,11 +53,11 @@ class TestRakeXcodebuildTask < Rake::TestCase
     assert_equal expected, workspace_and_scheme.project_args
   end
 
-  def test_setting_project_attr_sets_xcodeproj
+  def test_setting_xcodeproj_attr_sets_project
     xct = Rake::XcodebuildTask.new do |t|
-      t.project = 'Project.xcodeproj'
+      t.xcodeproj = 'Project.xcodeproj'
     end
-    assert_equal 'Project.xcodeproj', xct.xcodeproj
+    assert_equal 'Project.xcodeproj', xct.project
   end
 
   def test_xcodebuild_opts
@@ -72,7 +72,7 @@ class TestRakeXcodebuildTask < Rake::TestCase
       t.xcodeproj = 'Project'
       t.workspace = 'Project'
     end
-    assert_equal 'Project.xcodeproj', xct.xcodeproj
+    assert_equal 'Project.xcodeproj', xct.project
     assert_equal 'Project.xcworkspace', xct.workspace
   end
 

@@ -19,11 +19,11 @@ module Rake
     end
 
     # The Xcode project file.
-    attr_accessor :xcodeproj
-    def xcodeproj=(xcodeproj)
-      @xcodeproj = xcodeproj.ext('.xcodeproj')
+    attr_accessor :project
+    def project=(project)
+      @project = project.ext('.xcodeproj')
     end
-    alias_method :project=, :xcodeproj=
+    alias_method :xcodeproj=, :project=
 
     # The Xcode workspace file.
     attr_accessor :workspace
@@ -53,7 +53,7 @@ module Rake
     end
 
     def project_args
-      args_for_attrs(:xcodeproj, :workspace, :scheme)
+      args_for_attrs(:project, :workspace, :scheme)
     end
 
     def args_for_attrs(*attrs)
