@@ -1,5 +1,5 @@
 require_relative 'helper'
-require 'rake/xcodebuild/xcscheme_task'
+require 'rake/xcscheme_task'
 
 class TestRakeXcodebuildTask < Rake::TestCase
   include Rake
