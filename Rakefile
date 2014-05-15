@@ -6,12 +6,11 @@ task :default => [:test]
 
 Rake::TestTask.new do |t|
   t.test_files = FileList['test/test*.rb']
-  p t.file_list_string
 end
 
 namespace :test do
   desc "Run tests whenever something is written to a named pipe"
   task :react do
-    exec './react.rb', 'rake', 'test'
+    exec './react.rb', 'bundle', 'exec', 'rake'
   end
 end

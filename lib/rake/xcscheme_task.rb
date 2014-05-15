@@ -2,6 +2,7 @@
 
 require 'rake'
 require 'rake/tasklib'
+require 'rake/xcodebuild_task'
 require 'ostruct'
 
 module Rake
