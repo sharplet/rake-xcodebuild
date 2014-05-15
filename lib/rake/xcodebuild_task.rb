@@ -2,6 +2,7 @@
 
 require 'rake'
 require 'rake/tasklib'
+require 'rake/xcodebuild/description_formatter'
 
 module Rake
 
@@ -10,6 +11,10 @@ module Rake
     # The xcodebuild action to run. If not specified, xcodebuild's default
     # will be used.
     attr_accessor :action
+
+    # The target to build. If not specified, xcodebuild's default will
+    # be used.
+    attr_accessor :target
 
     # The name of the task. (Defaults to either the action name or :build if
     # no action is specified.)
@@ -47,6 +52,7 @@ module Rake
     end
 
     def define
+      desc(format_description)
       task(name) do |t|
         sh ['xcodebuild', action, *project_args, *xcodebuild_opts].join(" ")
       end
@@ -64,6 +70,11 @@ module Rake
       end
     end
     private :args_for_attrs
+
+    def format_description
+      Rake::Xcodebuild::DescriptionFormatter.new(self).to_s
+    end
+    private :format_description
 
   end
 

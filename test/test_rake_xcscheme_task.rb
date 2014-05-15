@@ -30,4 +30,9 @@ class TestRakeXcschemeTask < Rake::TestCase
     assert_equal 'Scheme', xst.tasks[:test].scheme
   end
 
+  def test_task_description
+    xst = Rake::XCSchemeTask.new('Example')
+    assert_equal "Build scheme Example", Rake::Task[:build].comment
+    assert_equal "Run tests for scheme Example", Rake::Task[:test].comment
+  end
 end

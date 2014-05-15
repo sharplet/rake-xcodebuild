@@ -83,4 +83,17 @@ class TestRakeXcodebuildTask < Rake::TestCase
     assert Task.task_defined?(:test)
   end
 
+  def test_task_description
+    xct = Rake::XcodebuildTask.new do |t|
+      t.project = 'Example'
+    end
+    assert_equal "Build the default target in Example.xcodeproj", Rake::Task[:build].comment
+
+    xct = Rake::XcodebuildTask.new(:build2) do |t|
+      t.project = 'Example'
+      t.target = 'Foobar'
+    end
+    assert_equal "Build target Foobar in Example.xcodeproj", Rake::Task[:build2].comment
+  end
+
 end
