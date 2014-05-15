@@ -27,7 +27,7 @@ module Rake
 
     def initialize(name = nil)
       @name = name
-      @attrs = OpenStruct.new(:actions => DEFAULT_ACTIONS)
+      @attrs = OpenStruct.new(:actions => DEFAULT_ACTIONS).extend(EachPairEnumerable)
       yield @attrs if block_given?
       @actions = @attrs.delete_field(:actions).flatten
       @tasks = {}
@@ -46,6 +46,16 @@ module Rake
         tasks[task.name] = task
       end
       self
+    end
+
+    private
+
+    # Backwards compatible each_pair enumerator for ruby 1.9.3.
+    module EachPairEnumerable
+      def each_pair
+        return to_enum __method__ unless block_given?
+        marshal_dump.each_pair{|p| yield p}
+      end if RUBY_VERSION < "2.0"
     end
 
   end
