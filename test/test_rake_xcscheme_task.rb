@@ -1,7 +1,7 @@
 require_relative 'helper'
 require 'rake/xcscheme_task'
 
-class TestRakeXcodebuildTask < Rake::TestCase
+class TestRakeXcschemeTask < Rake::TestCase
   include Rake
 
   def test_initialize
